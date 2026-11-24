@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jre-alpine
+FROM eclipse-temurin:8-jre-noble
 LABEL maintainer="Shivakumar Ningappa <shivagowda@gmail.com>"
 
 # Copy the already build jar to the image
