@@ -1,0 +1,37 @@
+# Lab shortcut (allowed by the lab guide): image path hard-coded.
+# Production: image: <+artifacts.primary.image> so the deployed tag is the one CI just built.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jhttp
+  labels:
+    app: jhttp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jhttp
+  template:
+    metadata:
+      labels:
+        app: jhttp
+    spec:
+      containers:
+        - name: jhttp
+          image: docker.io/michaeltuszynski/jhttp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8888
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
