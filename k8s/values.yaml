@@ -1,0 +1,3 @@
+# Harness resolves <+...> expressions only in values YAML (not in object manifests).
+# The service's primary artifact is DockerHub michaeltuszynski/jhttp, tag = the CI run's sequenceId.
+image: <+artifacts.primary.image>
