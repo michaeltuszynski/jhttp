@@ -1,5 +1,6 @@
-# Lab shortcut (allowed by the lab guide): image path hard-coded.
-# Production: image: <+artifacts.primary.image> so the deployed tag is the one CI just built.
+# Image comes from the service's artifact source (tag = this run's CI build number), so every
+# deploy changes the pod spec and rolls out exactly the image CI just built and tested.
+# (Was hard-coded :latest — run #6 showed that makes a green deploy a no-op.)
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,7 +19,7 @@ spec:
     spec:
       containers:
         - name: jhttp
-          image: docker.io/michaeltuszynski/jhttp:latest
+          image: <+artifacts.primary.image>
           imagePullPolicy: Always
           ports:
             - containerPort: 8888
